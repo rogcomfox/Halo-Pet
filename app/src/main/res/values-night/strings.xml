@@ -1,7 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">HaloPet</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tv_landing">Your Pet. Safe and Sound.</string>
     <string name="tv_landing_info">No Need Worry About Your Pet</string>
     <string name="img_landing">Landing Picture</string>
