@@ -1,4 +1,4 @@
-package com.nusantarian.halopet.fragment
+package com.nusantarian.halopet.fragment.auth
 
 import android.os.Bundle
 import android.text.Spannable

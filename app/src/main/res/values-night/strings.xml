@@ -10,4 +10,9 @@
     <string name="tv_forgot_pass">Forgot Password?</string>
     <string name="til_name">Full Name</string>
     <string name="til_confirm">Confirm Password</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_almanac">Almanac</string>
+    <string name="nav_add">Add</string>
+    <string name="nav_notifications">Notifications</string>
+    <string name="nav_profile">Profile</string>
 </resources>

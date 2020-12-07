@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.nusantarian.halopet.R
 import com.nusantarian.halopet.databinding.ActivityAuthBinding
-import com.nusantarian.halopet.fragment.LandingFragment
+import com.nusantarian.halopet.fragment.auth.LandingFragment
 
 class AuthActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedListener {
 
