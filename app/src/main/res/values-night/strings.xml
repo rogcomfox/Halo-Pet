@@ -15,4 +15,5 @@
     <string name="nav_add">Add</string>
     <string name="nav_notifications">Notifications</string>
     <string name="nav_profile">Profile</string>
+    <string name="btn_logout">Log Out</string>
 </resources>

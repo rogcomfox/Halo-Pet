@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.nusantarian.halopet.R
 import com.nusantarian.halopet.activity.MainActivity
 import com.nusantarian.halopet.databinding.FragmentRegisterBinding
+import com.nusantarian.halopet.model.User
 
 class RegisterFragment : Fragment(), View.OnClickListener {
 
@@ -25,6 +27,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
         // Inflate the layout for this fragment
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         binding.btnRegister.setOnClickListener(this)
+        auth = FirebaseAuth.getInstance()
         return binding.root
     }
 
@@ -39,20 +42,38 @@ class RegisterFragment : Fragment(), View.OnClickListener {
             if (!isValid(email, pass, name, confirm)){
                 binding.progress.visibility = View.GONE
             } else {
-                auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
-                    if (it.isSuccessful){
-                        Toast.makeText(activity!!, "Welcome to Halo-Pet!", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(activity!!, MainActivity::class.java))
-                        activity!!.finish()
-                    } else {
-                        Toast.makeText(activity!!, "Failed to Register", Toast.LENGTH_SHORT).show()
-                    }
-                    binding.progress.visibility = View.GONE
-                }.addOnFailureListener {
-                    Toast.makeText(activity!!, it.message, Toast.LENGTH_SHORT).show()
-                    binding.progress.visibility = View.GONE
-                }
+                registerUser(email, pass, name)
             }
+        }
+    }
+
+    private fun registerUser(email: String, pass: String, name: String){
+        auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
+            if (it.isSuccessful){
+                val id = auth.currentUser?.uid!!
+                addUserData(id, email, name)
+            } else {
+                Toast.makeText(activity!!, "Failed to Register", Toast.LENGTH_SHORT).show()
+            }
+            binding.progress.visibility = View.GONE
+        }.addOnFailureListener {
+            Toast.makeText(activity!!, it.message, Toast.LENGTH_SHORT).show()
+            binding.progress.visibility = View.GONE
+        }
+    }
+
+    private fun addUserData(id: String, email: String, name: String) {
+        val data = FirebaseFirestore.getInstance().collection("users").document(id)
+        val user = User(email, name, "", "")
+        data.set(user).addOnCompleteListener {
+            if (it.isSuccessful){
+                Toast.makeText(activity!!, "Welcome to Halo-Pet!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(activity!!, MainActivity::class.java))
+                activity!!.finish()
+            }
+        }.addOnFailureListener {
+            Toast.makeText(activity!!, it.message, Toast.LENGTH_SHORT).show()
+            binding.progress.visibility = View.GONE
         }
     }
 

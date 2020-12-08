@@ -26,7 +26,7 @@ class AuthActivity : AppCompatActivity(), FragmentManager.OnBackStackChangedList
     }
 
     override fun onBackStackChanged() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onBackPressed() {
